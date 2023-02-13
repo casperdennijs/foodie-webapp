@@ -1,0 +1,38 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    padding: 1em;
+}
+
+header form {
+    display: flex;
+    background-color: #ECECEC;
+    border-radius: 10px;
+    padding: .5em;
+}
+
+header form input {
+    display: block;
+    height: 48px;
+    background: transparent;
+    border: none;
+}
+
+header form input[type=text] {
+    width: 100%;
+    outline: none;
+    padding: 0 1em;
+    font-size: 1em;
+}
+
+header form input[type=submit] {
+    aspect-ratio: 1 / 1;
+    background-image: url("./../images/search.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 32px;
+}
