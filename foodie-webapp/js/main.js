@@ -65,6 +65,7 @@ previousButton.addEventListener("click", () => {
     } else {
         currentPage--
     }
+    currentPage = Math.ceil(currentPage)
 
     getData()
         .then(data => {
@@ -79,6 +80,7 @@ nextButton.addEventListener("click", () => {
     } else {
         currentPage++
     }
+    currentPage = Math.ceil(currentPage)
 
     getData()
         .then(data => {
