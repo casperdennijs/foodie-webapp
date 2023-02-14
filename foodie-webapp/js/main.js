@@ -42,13 +42,9 @@ getData()
 searchForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const input = event.target.querySelector("input")
-    if (input.value == "") {
-        console.log("Geen zoekterm ingevuld")
-    } else {
-        searchQuery = input.value
-        getData()
-            .then(data => {
-            showData(data)
-        })
-    }
+    searchQuery = input.value
+    getData()
+        .then(data => {
+        showData(data)
+    })
 })
