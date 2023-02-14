@@ -42,6 +42,21 @@ header form input[type=submit] {
     background-size: 32px;
 }
 
+header .row {
+    margin-top: 1em;
+    display: flex;
+}
+
+header .row button {
+    margin-left: auto;
+    height: 32px;
+    padding: .5em 1em;
+    border-radius: 10px;
+    border: none;
+    background: #5180C8;
+    color: white;
+}
+
 main {
     width: 100%;
 }
@@ -89,4 +104,23 @@ main {
     border: none;
     background: #5180C8;
     color: white;
+}
+
+.scannen {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2em;
+}
+
+.scannen video {
+    height: 100%;
+    width: 100%;
+}
+
+.scannen.enable {
+    display: block;
 }

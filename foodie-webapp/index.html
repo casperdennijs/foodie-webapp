@@ -15,11 +15,18 @@
             <input type="text" id="search" name="search">
             <input type="submit" value="">
         </form>
+        <div class="row">
+            <p class="results"></p>
+            <button class="scanner">Scannen</button>
+        </div>
     </header>
     <main>
-        <p class="results"></p>
         <section class="items"></section>
+        <section class="scannen">
+            <video id="video" autoplay></video>
+        </section>
     </main>
     <script src="./js/main.js"></script>
+    <script src="./js/camera.js"></script>
 </body>
 </html>
