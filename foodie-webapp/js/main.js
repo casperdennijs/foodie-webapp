@@ -1,4 +1,5 @@
 const items = document.querySelector(".items")
+const results = document.querySelector(".results")
 const searchForm = document.querySelector("header form")
 let searchQuery = ""
 
@@ -8,6 +9,7 @@ async function getData() {
 }
 
 function showData(data) {
+    results.textContent = data.count + " results found"
     items.innerHTML = "";
     for (let i = 0; i < data.products.length; i++) {
         // Create div
