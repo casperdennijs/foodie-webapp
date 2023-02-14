@@ -9,6 +9,10 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
+header {
+    margin-bottom: 1em;
+}
+
 header form {
     display: flex;
     background-color: #ECECEC;
