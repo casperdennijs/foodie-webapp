@@ -45,6 +45,11 @@ header form input[type=submit] {
 header .row {
     margin-top: 1em;
     display: flex;
+    align-items: center;
+}
+
+header .row .results {
+    font-size: 14px;
 }
 
 header .row button {
@@ -59,6 +64,22 @@ header .row button {
 
 main {
     width: 100%;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: .5em;
+}
+
+.pagination button {
+    height: 32px;
+    width: 50px;
+    padding: .5em 1em;
+    border-radius: 10px;
+    border: none;
+    background: #5180C8;
+    color: white;   
 }
 
 .items {
