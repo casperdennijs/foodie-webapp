@@ -1,4 +1,3 @@
-const items = document.querySelector(".items")
 const results = document.querySelector(".results")
 const searchForm = document.querySelector("header form")
 const previousButton = document.querySelector("#previous")
@@ -8,13 +7,14 @@ let currentPage = 1;
 let totalPages = 0;
 
 async function getData() {
+    createSkeleton();
 	let res = await fetch("https://nl.openfoodfacts.org/cgi/search.pl?search_terms=" + searchQuery + "&page=" + currentPage + "&json=true")
 	return await res.json();
 }
 
 function showData(data) {
     totalPages = data.count / data.page_size;
-    console.log(Math.ceil(totalPages));
+    console.log(data.count + " / " + data.page_size + " = " + totalPages);
     results.textContent = data.count + " results found - Page " + data.page + " of " + Math.ceil(totalPages);
     items.innerHTML = "";
     for (let i = 0; i < data.products.length; i++) {
