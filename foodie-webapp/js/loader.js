@@ -25,5 +25,3 @@ function createSkeleton() {
         item.appendChild(button);
     }
 }
-
-createSkeleton()
