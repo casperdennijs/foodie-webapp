@@ -75,7 +75,7 @@ previousButton.addEventListener("click", () => {
 
 nextButton.addEventListener("click", () => {
     console.log("Next page")
-    if (currentPage == totalPages) {
+    if (currentPage == Math.ceil(totalPages)) {
         currentPage = 1
     } else {
         currentPage++
