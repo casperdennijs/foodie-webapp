@@ -1,9 +1,11 @@
-const items = document.querySelector(".items")
-const count = 24;
+import * as config from "./config.js";
+console.log("Loader.js is loaded");
 
-function createSkeleton() {
+const items = document.querySelector(".items");
+
+export function createSkeleton() {
     items.innerHTML = "";
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i < config.default.count; i++) {
         // Create div
         const item = document.createElement("div");
         item.classList.add("skeleton-item");
