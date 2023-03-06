@@ -6,6 +6,10 @@ const searchForm = document.querySelector("form");
 const previousButton = document.querySelector("#previous");
 const nextButton = document.querySelector("#next");
 
+if (window.location.hash == "") {
+    window.location.hash = "#home"
+}
+
 router();
 
 searchForm.addEventListener("submit", searchResults);
