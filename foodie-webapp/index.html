@@ -14,24 +14,39 @@
 </head>
 <body>
     <header>
-        <form>
-            <input type="text" id="search" name="search" placeholder="Zoek een product op...">
-            <input type="submit" value="">
-        </form>
-        <div class="row">
-            <p class="results"></p>
-            <button class="scanner">Scannen</button>
+        <div class="header-content">
+            <form>
+                <input type="text" id="search" name="search" placeholder="Zoek een product op...">
+                <input type="submit" value="">
+            </form>
+            <div class="row">
+                <p class="results"></p>
+                <button class="scanner">Scannen</button>
+            </div>
+            <section class="pagination">
+                <button id="previous" class="page"><</button>
+                <button id="next" class="page">></button>
+            </section>
         </div>
     </header>
     <main>
-        <section class="pagination">
-            <button id="previous" class="page"><</button>
-            <button id="next" class="page">></button>
-        </section>
         <section class="items">
+        </section>
+        <section class="scannen">
         </section>
         <section class="errors">
         </section>
+        <section class="modal">
+        </section>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/@undecaf/zbar-wasm@0.9.11/dist/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@undecaf/barcode-detector-polyfill@0.9.13/dist/index.js"></script>
+    <script>
+        try {
+            window['BarcodeDetector'].getSupportedFormats()
+        } catch {
+            window['BarcodeDetector'] = barcodeDetectorPolyfill.BarcodeDetectorPolyfill
+        }
+    </script>
 </body>
 </html>
