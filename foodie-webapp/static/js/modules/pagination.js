@@ -1,5 +1,5 @@
 import * as config from "./config.js";
-import { getData } from "./api.js";
+import { getProducts } from "./api.js";
 console.log("Pagination.js is loaded");
 
 export function previousPage() {
@@ -10,7 +10,7 @@ export function previousPage() {
     }
     config.default.currentPage = Math.ceil(config.default.currentPage)
 
-    getData();
+    getProducts();
 }
 
 export function nextPage() {
@@ -21,5 +21,5 @@ export function nextPage() {
     }
     config.default.currentPage = Math.ceil(config.default.currentPage)
 
-    getData();
+    getProducts();
 }

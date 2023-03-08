@@ -1,15 +1,19 @@
 import * as config from "./config.js";
-import { getData } from "./api.js";
+import { getProducts } from "./api.js";
+import { showDetails } from "./product.js";
 
 export function router() {
     routie({
         'home': () => {
-            getData();
+            getProducts();
         },
         'search/:id': id => {
             config.default.searchQuery = id;
             console.log("Zoeken naar:" + config.default.searchQuery);
-            getData();
+            getProducts();
+        },
+        'product/:id': id => {
+            showDetails(id);
         }
     })
 }

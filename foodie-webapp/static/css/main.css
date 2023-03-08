@@ -6,11 +6,12 @@
 
 body {
     font-family: 'Poppins', sans-serif;
+    padding-top: 192px;
+    padding-bottom: 2em;
 }
 
 header {
     width: 100%;
-    margin-bottom: 1em;
     padding: 1em;
     background-color: #f5f5f5;
     box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.1);
@@ -246,6 +247,52 @@ main {
     color: #000000;
 }
 
+.modal {
+    visibility: hidden;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: .5s;
+    z-index: 10;
+}
+
+.modal.enabled {
+    visibility: visible;
+    background: rgba(0 0 0 / 0.5);
+    backdrop-filter: blur(4px);
+}
+
+.modal .detail {
+    visibility: hidden;
+    background: white;
+    height: 90vh;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0px -5px 5px 0px rgba(0,0,0,0.1);
+    transition: .5s;
+    transform: translateY(100vh);
+    overflow: hidden;
+}
+
+.modal .detail img {
+    height: 250px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.modal.enabled .detail {
+    visibility: visible;
+    transform: translateY(0);
+}
+
+body:has(.modal.enabled) {
+    overflow: hidden;
+}
+
 @media screen and (min-width: 992px) {
     .header-content, main {
         max-width: 1200px;
@@ -254,5 +301,21 @@ main {
 
     .items {
         grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .modal {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: .5s;
+    }
+
+    .modal .detail {
+        max-width: 992px;
+        width: 100%;
+        aspect-ratio: 1/1;
+        position: unset;
+        border-radius: 20px;
+        transition: .5s;
     }
 }

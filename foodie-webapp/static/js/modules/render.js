@@ -1,9 +1,10 @@
 import * as config from "./config.js";
-import { getData } from "./api.js";
+import { getProducts } from "./api.js";
 
 const results = document.querySelector(".results");
 const items = document.querySelector(".items");
 const errors = document.querySelector(".errors");
+const details = document.querySelector(".detail");
 
 export function renderData(data) {
     console.log("Render function")
@@ -33,10 +34,13 @@ export function renderData(data) {
         button.textContent = "Meer info";
         button.id = data.products[i]._id;
         item.appendChild(button);
+        button.addEventListener("click", () => {
+            window.location.hash = "#product/" + data.products[i]._id;
+        });
     }
 }
 
-export function renderEmpty(data){
+export function renderEmpty(){
     console.log("RenderEmpty function");
 
     items.innerHTML = "";
@@ -57,12 +61,12 @@ export function renderEmpty(data){
         errors.innerHTML = "";
         config.default.searchQuery = "";
         config.default.currentPage = 1;
-        getData();
+        getProducts();
     })
     error.appendChild(button);
 }
 
-export function renderError(err) {
+export function renderError() {
     console.log("RenderError function");
 
     items.innerHTML = "";
@@ -80,7 +84,23 @@ export function renderError(err) {
     button.classList.add("retry")
     button.addEventListener("click", () => {
         errors.innerHTML = "";
-        getData();
+        getProducts();
     })
     error.appendChild(button);
+}
+
+export function renderDetail(data) {
+    console.log("RenderDetail function");
+
+    details.innerHTML = "";
+
+    // Create image
+    const image = document.createElement("img");
+    image.src = data.product.image_url;
+    details.appendChild(image);
+
+    // Create title
+    const title = document.createElement("p");
+    title.textContent = data.product.product_name;
+    details.appendChild(title);
 }
