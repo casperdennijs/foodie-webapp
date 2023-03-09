@@ -40,6 +40,7 @@ Het eindresultaat kan je zien bij de volgende link: https://casperdennijs.github
 Na afloop van het eindgesprek heb ik een globale Activity Flow Diagram uitgewerkt wat er per "pagina" gebeurd. Voor alle belangrijke functies geef ik hieronder een uitleg van wat het doet.
 
 ### createSkeletons()
+Deze functie wordt altijd voor het fetchen uitgevoerd om gedurende fetch een loading state te tonen. Dit gebeurd als je op de pagina komt, je iets aan het zoeken bent of naar de volgende pagina toe gaat. In createSkeletons() wordt er elementen gemaakt die als tijdelijke vervangen bieden voor de data die nog ingeladen worden.
 ```js
 export function createSkeleton() {
     items.innerHTML = "";
@@ -68,6 +69,7 @@ export function createSkeleton() {
 ```
 
 ### getProducts()
+Hiermee fetch ik alle producten (maximaal 24 per pagina) op en laat ik ze vervolgens renderen. Mocht dit niet lukken wordt de render vervangen met een Error. Zoals je ook kan zien begint deze functie met het eerst uitvoeren van de loading state functie createSkeleton().
 ```js
 export function getProducts() {
     createSkeleton();
@@ -90,6 +92,7 @@ export function getProducts() {
 ```
 
 ### createVideo()
+Wanneer je op de Scannen button drukt wordt de createVideo() functie uitgeroepen. Hiermee wordt er een video element gemaakt in de HTML die vervolgens als source je camera pakt. Daarnaast wordt de functie scanProducts() geactiveerd die met een interval van 3 seconden uitgevoerd wordt. Deze functie sluit ook alles weer af als je voor een tweede keer op de button drukt.
 ```js
 export function createVideo() {
     if (cameraStatus == 0) {
@@ -121,6 +124,7 @@ export function createVideo() {
 ```
 
 ### showDetails(id)
+Als je op de Meer info button drukt wordt een id gevraagd die meegenomen wordt op de button en voegt het de style Enabled toe aan de modal element. Vervolgens wordt ook de getProduct() functie opgeroepen waarin de id wordt meegenomen.
 ```js
 export function showDetails(id) {
     modal.classList.add("enabled");
@@ -128,7 +132,8 @@ export function showDetails(id) {
 }
 ```
 
-### getProduct()
+### getProduct(id)
+Deze functie is heel erg vergelijkbaar met getProducts() en fetch ook informatie van de API. Bij deze fetch wordt alleen data van één specifiek product opgehaald, de product die opgehaald wordt is bepaald door de mee gegeven id. Wanneer de fetch is uitgevoerd wordt de data gerenderd op de pagina.
 ```js
 export function getProduct(id) {
     createSkeleton();
@@ -146,6 +151,7 @@ export function getProduct(id) {
 ```
 
 ### scanProducts()
+Met deze functie wordt er gebruik gemaakt van de BarcodeDetector Web API. Hierin maak ik gebruik van de eerdere aangemaakt video en controleert het op barcodes in de stream. Om te voorkomen dat er spam aan detecties gedaan kunnen worden is ervoor gekozen dat de functie in een interval van 3 seconden uitgevoerd wordt. Wanneer er een product gescanned is wordt de gebruiker direct geredirect naar de product detail van de gescande product.
 ```js
 function scanProducts() {
     const video = document.querySelector("#video");
@@ -177,4 +183,3 @@ function scanProducts() {
     });
 }
 ```
-
