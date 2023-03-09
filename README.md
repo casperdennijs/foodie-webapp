@@ -1,4 +1,4 @@
-# CSS Vuurwerkshow
+# Foodie WebApp
 
 Ik heb voor het vak Web App from Scratch gekozen voor de opdracht 'Food API'. Hierbij wil ik een product overview pagina, detail pagina en barcodescanner in bouwen.
 
