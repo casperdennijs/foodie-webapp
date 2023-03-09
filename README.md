@@ -34,6 +34,3 @@ Verder ben ik nog bezig met de barcodescanner wat wel wat lastiger was. Mijn lap
 Wanneer je nu een product scanned op de camera detecteert het de barcode en wordt je meteen redirect naar de detailpagina.
 
 Het eindresultaat kan je zien bij de volgende link: https://casperdennijs.github.io/css-vuurwerkshow/
-
-## Reflectie
-<invullen>
