@@ -180,22 +180,28 @@ main {
 }
 
 .scannen {
-    display: none;
+    visibility: hidden;
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     padding: 2em;
+    transition: .5s;
 }
 
 .scannen video {
     height: 100%;
     width: 100%;
+    display: block;
+    overflow: hidden;
+    border-radius: 20px;
 }
 
 .scannen.enable {
-    display: block;
+    visibility: visible;
+    background: rgba(0 0 0 / 0.5);
+    backdrop-filter: blur(4px);
 }
 
 .errors {
@@ -276,12 +282,14 @@ main {
     transition: .5s;
     transform: translateY(100vh);
     overflow: hidden;
+    padding: 1em;
 }
 
 .modal .detail img {
     height: 250px;
     width: 100%;
     object-fit: cover;
+    border-radius: 20px;
 }
 
 .modal.enabled .detail {
