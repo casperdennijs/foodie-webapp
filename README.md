@@ -34,3 +34,147 @@ Verder ben ik nog bezig met de barcodescanner wat wel wat lastiger was. Mijn lap
 Wanneer je nu een product scanned op de camera detecteert het de barcode en wordt je meteen redirect naar de detailpagina.
 
 Het eindresultaat kan je zien bij de volgende link: https://casperdennijs.github.io/css-vuurwerkshow/
+
+## Activity Flow Diagram
+![Activity Flow Diagram](https://user-images.githubusercontent.com/56598338/224024411-803f5396-89f5-4a20-b000-3952b3010c3d.png)
+Na afloop van het eindgesprek heb ik een globale Activity Flow Diagram uitgewerkt wat er per "pagina" gebeurd. Voor alle belangrijke functies geef ik hieronder een uitleg van wat het doet.
+
+### createSkeletons()
+```js
+export function createSkeleton() {
+    items.innerHTML = "";
+    for (let i = 0; i < config.default.count; i++) {
+        // Create div
+        const item = document.createElement("div");
+        item.classList.add("skeleton-item");
+        items.appendChild(item);
+
+        // Create image inside div
+        const image = document.createElement("div");
+        image.classList.add("skeleton-img");
+        item.appendChild(image);
+
+        // Create title inside div
+        const title = document.createElement("p");
+        title.classList.add("skeleton-p");
+        item.appendChild(title);
+
+        // Create button inside div
+        const button = document.createElement("button");
+        button.classList.add("skeleton-button");
+        item.appendChild(button);
+    }
+}
+```
+
+### getProducts()
+```js
+export function getProducts() {
+    createSkeleton();
+    fetch("https://nl.openfoodfacts.org/cgi/search.pl?search_terms=" + config.default.searchQuery + "&page=" + config.default.currentPage + "&json=true")
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            if (data.page_count == 0) {
+                renderEmpty(data);  
+            } else {
+                renderData(data);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            renderError(err);
+        });
+}
+```
+
+### createVideo()
+```js
+export function createVideo() {
+    if (cameraStatus == 0) {
+        const videoElement = document.createElement("video");
+        videoElement.setAttribute("id", "video");
+        videoElement.autoplay = true;
+        scanSection.appendChild(videoElement);
+        scanSection.classList.add("enable");
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            const constraints = { 
+                video: true,
+                audio: false
+            }
+            navigator.mediaDevices.getUserMedia(constraints).then(stream => videoElement.srcObject = stream);
+        }
+        scanInterval = setInterval(scanProducts, 3000)
+        cameraStatus = 1;
+    } else {
+        const video = document.querySelector("#video");
+        const mediaStream = video.srcObject;
+        const tracks = mediaStream.getTracks();
+        tracks.forEach(track => track.stop());
+        scanSection.classList.remove("enable");
+        clearInterval(scanInterval)
+        scanSection.innerHTML = ""
+        cameraStatus = 0;
+    }
+}
+```
+
+### showDetails(id)
+```js
+export function showDetails(id) {
+    modal.classList.add("enabled");
+    getProduct(id);
+}
+```
+
+### getProduct()
+```js
+export function getProduct(id) {
+    createSkeleton();
+    fetch("https://nl.openfoodfacts.org/api/v0/product/" + id + ".json")
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            renderDetail(data);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
+```
+
+### scanProducts()
+```js
+function scanProducts() {
+    const video = document.querySelector("#video");
+
+    barcodeDetector
+    .detect(video)
+    .then((barcodes) => {
+        if (barcodes.length == 0) {
+            console.log("No barcode found...")
+        } else {
+            barcodes.forEach((barcode) => {
+                console.log(barcode.rawValue);
+
+                const video = document.querySelector("#video");
+                const mediaStream = video.srcObject;
+                const tracks = mediaStream.getTracks();
+                tracks.forEach(track => track.stop());
+                scanSection.classList.remove("enable");
+                clearInterval(scanInterval)
+                scanSection.innerHTML = ""
+                cameraStatus = 0;
+        
+                window.location.hash = "#product/" + barcode.rawValue;
+            });
+        }
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+}
+```
+
